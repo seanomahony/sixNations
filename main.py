@@ -9,7 +9,7 @@ options.add_argument('--incognito')
 options.add_argument('--headless')
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
-URL = 'https://www.sixnationsrugby.com/report/scotland-secure-historic-twickenham-victory#match-stats'
+URL = 'https://www.sixnationsrugby.com/report/second-half-comeback-sees-wales-edge-ireland-in-cardiff#match-stats'
 driver.get(URL)
 player_stats = driver.find_elements_by_class_name("player-stats")
 for x in range(len(player_stats)):
@@ -24,9 +24,12 @@ players_selector = pd.read_html(page_source)
 df = players_selector[4]
 df.drop(df.columns[df.columns.str.contains('unnamed', case=False)], axis=1, inplace=True)
 df.head()
-df.to_csv(r'C:\temp\EnglandPlayersVsScotland.csv')
+df.to_csv(r'C:\temp\WalesPlayersVsIreland.csv')
 
 df2 = players_selector[5]
 df2.drop(df2.columns[df2.columns.str.contains('unnamed', case=False)], axis=1, inplace=True)
 df2.head()
-df2.to_csv(r'C:\temp\ScotlandPlayersVsEngland.csv')
+df2.to_csv(r'C:\temp\IrelandPlayersVsWales.csv')
+
+driver.quit()
+exit()
